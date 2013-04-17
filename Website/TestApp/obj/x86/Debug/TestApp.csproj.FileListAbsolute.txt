@@ -1,0 +1,6 @@
+C:\VSProjects\github\websiteblog\Website\TestApp\bin\Debug\TestApp.exe.config
+C:\VSProjects\github\websiteblog\Website\TestApp\bin\Debug\TestApp.exe
+C:\VSProjects\github\websiteblog\Website\TestApp\bin\Debug\TestApp.pdb
+C:\VSProjects\github\websiteblog\Website\TestApp\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\VSProjects\github\websiteblog\Website\TestApp\obj\x86\Debug\TestApp.exe
+C:\VSProjects\github\websiteblog\Website\TestApp\obj\x86\Debug\TestApp.pdb
