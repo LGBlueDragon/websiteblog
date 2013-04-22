@@ -12,7 +12,7 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            string local = ConfigurationManager.ConnectionStrings["local"].ConnectionString;
+           /* string local = ConfigurationManager.ConnectionStrings["local"].ConnectionString;
             string remote = ConfigurationManager.ConnectionStrings["remote"].ConnectionString;
             OdbcDataAdapter adapter1 = new OdbcDataAdapter("SELECT * FROM user", remote);
             DataSet set1 = new DataSet();
@@ -31,7 +31,7 @@ namespace TestApp
             else
             {
                 Console.WriteLine("Not connected!");
-            }
+            }*/
 
             Console.ReadKey();
         }
