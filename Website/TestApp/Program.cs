@@ -5,6 +5,7 @@ using System.Text;
 using System.Configuration;
 using System.Data.Odbc;
 using System.Data;
+using MyBlog.Model;
 
 namespace TestApp
 {
@@ -32,6 +33,7 @@ namespace TestApp
             {
                 Console.WriteLine("Not connected!");
             }*/
+            User newuser = new User("Bla", "12345", "bla@localhost", 1);
 
             Console.ReadKey();
         }
