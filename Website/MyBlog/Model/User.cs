@@ -16,6 +16,7 @@ namespace MyBlog.Model
         private string email;
         private int usergroup;
 
+
         public User(string username, string password, string email, int usergroup)
         {
             this.username = username;
@@ -23,30 +24,32 @@ namespace MyBlog.Model
             this.email = email;
             this.usergroup = usergroup;
 
-           /* if (!Save())
-            {
-                throw new DataException("<b>ERROR: COULD NOT CREATE ENTRY!</b>");
-            }*/
+           if (!Save())
+           {
+               throw new DataException("<b>ERROR: COULD NOT CREATE ENTRY!</b>");
+           }
 
-            this.iduser = GetUserID();
+           this.iduser = GetUserID();
         }
+
 
         public bool Save()
         {
-            string cstring = ConfigurationManager.ConnectionStrings["local"].ConnectionString;
+            string cstring = Settings.ConnectionString;
             using(OdbcConnection connection = new OdbcConnection(cstring))
             {
                 connection.Open();
 
-                string insertcmd = "INSERT INTO website.user(username,password,email,usergroup)" + " " +
-                                   "VALUES(@username,@password,@email,@usergroup)";
+                string insertcmd = "INSERT INTO " + 
+                                   Settings.UserTableName + 
+                                   "(username,password,email,usergroup) " + 
+                                   "VALUES(?,?,?,?)";
                 OdbcCommand cmd = new OdbcCommand(insertcmd, connection);
-                
-                cmd.Parameters.AddWithValue("@username", this.username);
-                cmd.Parameters.AddWithValue("@password", this.password);
-                cmd.Parameters.AddWithValue("@email", this.email);
-                cmd.Parameters.AddWithValue("@usergroup", this.usergroup);
 
+                cmd.Parameters.Add("@p1", OdbcType.NVarChar, 50).Value = this.username;
+                cmd.Parameters.Add("@p2", OdbcType.NVarChar, 50).Value = this.password;
+                cmd.Parameters.Add("@p3", OdbcType.NVarChar, 50).Value = this.email;
+                cmd.Parameters.Add("@p4", OdbcType.TinyInt).Value = this.usergroup;
 
                 if (cmd.ExecuteNonQuery() == 1)
                 {
@@ -64,17 +67,19 @@ namespace MyBlog.Model
 
         public bool Delete()
         {
-            string cstring = ConfigurationManager.ConnectionStrings["local"].ConnectionString;
+            string cstring = Settings.ConnectionString;
             using (OdbcConnection connection = new OdbcConnection(cstring))
             {
                 connection.Open();
 
-                string insertcmd = "DELETE FROM website.user WHERE username = @username";
+                string insertcmd = "DELETE FROM " + 
+                                   Settings.UserTableName +
+                                   " WHERE username = ?";
                 OdbcCommand cmd = new OdbcCommand(insertcmd, connection);
 
                 cmd.Parameters.AddWithValue("@username", this.username);
 
-                if (cmd.ExecuteNonQuery() == 1)
+                if (cmd.ExecuteNonQuery() > 0)
                 {
                     connection.Close();
                     return true;
@@ -88,15 +93,19 @@ namespace MyBlog.Model
             }
         }
 
+
         private int GetUserID()
         {
             int ouruserid;
-            string cstring = ConfigurationManager.ConnectionStrings["local"].ConnectionString;
+            string cstring = Settings.ConnectionString;
             using (OdbcConnection connection = new OdbcConnection(cstring))
             {
                 connection.Open();
-                string insertcmd = "SELECT iduser FROM website.user WHERE username = @username";
-                OdbcCommand cmd = new OdbcCommand(insertcmd, connection);
+                string selectcmd = "SELECT iduser FROM " +
+                                   Settings.UserTableName +
+                                   "WHERE username = ?";
+
+                OdbcCommand cmd = new OdbcCommand(selectcmd, connection);
                 cmd.Parameters.AddWithValue("@username", this.username);
                 OdbcDataReader dr = cmd.ExecuteReader();
                 dr.Read();

@@ -1,5 +1,0 @@
-C:\VSProjects\github\websiteblog\Website\MyBlog\bin\MyBlog.dll
-C:\VSProjects\github\websiteblog\Website\MyBlog\bin\MyBlog.pdb
-C:\VSProjects\github\websiteblog\Website\MyBlog\obj\Debug\ResolveAssemblyReference.cache
-C:\VSProjects\github\websiteblog\Website\MyBlog\obj\Debug\MyBlog.dll
-C:\VSProjects\github\websiteblog\Website\MyBlog\obj\Debug\MyBlog.pdb

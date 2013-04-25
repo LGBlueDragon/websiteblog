@@ -33,7 +33,11 @@ namespace TestApp
             {
                 Console.WriteLine("Not connected!");
             }*/
+
+
             User newuser = new User("Bla", "12345", "bla@localhost", 1);
+
+            newuser.Delete();
 
             Console.ReadKey();
         }
