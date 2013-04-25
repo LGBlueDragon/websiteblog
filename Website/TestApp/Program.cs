@@ -34,11 +34,12 @@ namespace TestApp
                 Console.WriteLine("Not connected!");
             }*/
 
-
-            User newuser = new User("Bla", "12345", "bla@localhost", 1);
-
+            
+            User newuser = new User("ghjghj", "12345", "rtesgdsgrtf@localhost", 1);
             newuser.Delete();
 
+            Blog newblog = new Blog(1, DateTime.Now, "blabla", 0);
+            Console.WriteLine(newuser);
             Console.ReadKey();
         }
     }

@@ -17,10 +17,7 @@ namespace MyBlog
     /// Uses Configurationmanager to access .config files
     /// </summary>
     public static class Settings
-    {
-        static Settings()
-        {}
-        
+    { 
         public static string ConnectionString
         {
             get
@@ -38,8 +35,9 @@ namespace MyBlog
                 string general = ConfigurationManager.AppSettings["generalSettings"];
                 switch (general)
                 {
-                    case "sqlserver" : return "[dbo].[user]";
-                    case "mysql": return "website.user";
+                    case "odbc" : return "[dbo].[user]";
+                    case "local":
+                    case "remote": return "website.user";
                     default: throw new ConfigurationErrorsException("Missing 'generalSettings' in .config");
                 }   
             }
@@ -53,8 +51,9 @@ namespace MyBlog
                 string general = ConfigurationManager.AppSettings["generalSettings"];
                 switch (general)
                 {
-                    case "sqlserver": return "[dbo].[blog]";
-                    case "mysql": return "website.blog";
+                    case "odbc": return "[dbo].[blog]";
+                    case "local":
+                    case "remote": return "website.blog";
                     default: throw new ConfigurationErrorsException("Missing 'generalSettings' in .config");
                 }
             }

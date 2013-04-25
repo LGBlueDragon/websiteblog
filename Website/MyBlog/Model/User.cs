@@ -5,6 +5,7 @@ using System.Web;
 using System.Configuration;
 using System.Data;
 using System.Data.Odbc;
+using System.Text;
 
 namespace MyBlog.Model
 {
@@ -32,6 +33,21 @@ namespace MyBlog.Model
            this.iduser = GetUserID();
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("User ID: ");
+            sb.AppendLine(Convert.ToString(this.iduser));
+            sb.Append("Username: ");
+            sb.AppendLine(this.username);
+            sb.Append("Password: ");
+            sb.AppendLine(this.password);
+            sb.Append("Email: ");
+            sb.AppendLine(this.email);
+            sb.Append("Usergroup: ");
+            sb.AppendLine(Convert.ToString(this.usergroup));
+            return sb.ToString();
+        }
 
         public bool Save()
         {
@@ -103,7 +119,7 @@ namespace MyBlog.Model
                 connection.Open();
                 string selectcmd = "SELECT iduser FROM " +
                                    Settings.UserTableName +
-                                   "WHERE username = ?";
+                                   " WHERE username = ?";
 
                 OdbcCommand cmd = new OdbcCommand(selectcmd, connection);
                 cmd.Parameters.AddWithValue("@username", this.username);
