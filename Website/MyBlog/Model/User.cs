@@ -6,10 +6,12 @@ using System.Configuration;
 using System.Data;
 using System.Data.Odbc;
 using System.Text;
+using MySql.Data.MySqlClient;
+using MySql.Data.Types;
 
 namespace MyBlog.Model
 {
-    public class User
+    public partial class User
     {
         private int iduser;
         private string username;
@@ -24,7 +26,7 @@ namespace MyBlog.Model
             this.password = password;
             this.email = email;
             this.usergroup = usergroup;
-
+            
            if (!Save())
            {
                throw new DataException("<b>ERROR: COULD NOT CREATE ENTRY!</b>");
@@ -52,7 +54,7 @@ namespace MyBlog.Model
         public bool Save()
         {
             string cstring = Settings.ConnectionString;
-            using(OdbcConnection connection = new OdbcConnection(cstring))
+            using(MySqlConnection connection = new MySqlConnection(cstring))
             {
                 connection.Open();
 
@@ -60,12 +62,12 @@ namespace MyBlog.Model
                                    Settings.UserTableName + 
                                    "(username,password,email,usergroup) " + 
                                    "VALUES(?,?,?,?)";
-                OdbcCommand cmd = new OdbcCommand(insertcmd, connection);
+                MySqlCommand cmd = new MySqlCommand(insertcmd, connection);
 
-                cmd.Parameters.Add("@p1", OdbcType.NVarChar, 50).Value = this.username;
-                cmd.Parameters.Add("@p2", OdbcType.NVarChar, 50).Value = this.password;
-                cmd.Parameters.Add("@p3", OdbcType.NVarChar, 50).Value = this.email;
-                cmd.Parameters.Add("@p4", OdbcType.TinyInt).Value = this.usergroup;
+                cmd.Parameters.Add("@p1", MySqlDbType.String, 45).Value = this.username;
+                cmd.Parameters.Add("@p2", MySqlDbType.String, 45).Value = this.password;
+                cmd.Parameters.Add("@p3", MySqlDbType.String, 250).Value = this.email;
+                cmd.Parameters.Add("@p4", MySqlDbType.Int16).Value = this.usergroup;
 
                 if (cmd.ExecuteNonQuery() == 1)
                 {
@@ -73,7 +75,7 @@ namespace MyBlog.Model
                     return true;
                 }
                 else
-                {
+                { 
                     connection.Close();
                     return false;
                 }
@@ -84,14 +86,14 @@ namespace MyBlog.Model
         public bool Delete()
         {
             string cstring = Settings.ConnectionString;
-            using (OdbcConnection connection = new OdbcConnection(cstring))
+            using (MySqlConnection connection = new MySqlConnection(cstring))
             {
                 connection.Open();
 
                 string insertcmd = "DELETE FROM " + 
                                    Settings.UserTableName +
                                    " WHERE username = ?";
-                OdbcCommand cmd = new OdbcCommand(insertcmd, connection);
+                MySqlCommand cmd = new MySqlCommand(insertcmd, connection);
 
                 cmd.Parameters.AddWithValue("@username", this.username);
 
@@ -114,16 +116,16 @@ namespace MyBlog.Model
         {
             int ouruserid;
             string cstring = Settings.ConnectionString;
-            using (OdbcConnection connection = new OdbcConnection(cstring))
+            using (MySqlConnection connection = new MySqlConnection(cstring))
             {
                 connection.Open();
                 string selectcmd = "SELECT iduser FROM " +
                                    Settings.UserTableName +
                                    " WHERE username = ?";
 
-                OdbcCommand cmd = new OdbcCommand(selectcmd, connection);
+                MySqlCommand cmd = new MySqlCommand(selectcmd, connection);
                 cmd.Parameters.AddWithValue("@username", this.username);
-                OdbcDataReader dr = cmd.ExecuteReader();
+                MySqlDataReader dr = cmd.ExecuteReader();
                 dr.Read();
                 ouruserid = (int)dr["iduser"];
                 connection.Close();
