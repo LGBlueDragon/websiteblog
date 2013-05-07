@@ -2,6 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
+    <div id="titleform">
+        <asp:TextBox ID="titlebox" runat="server" Width="270px"></asp:TextBox></div>
     <div id="postform">
         <asp:TextBox ID="postformarea" runat="server" 
             TextMode="MultiLine" Width="66%" Height="200px"></asp:TextBox></div>

@@ -12,7 +12,7 @@ namespace MyBlog.Model
         {
             int numcomment = NumComments();
             StringBuilder sb = new StringBuilder();
-            //sb.AppendFormat("<h1>{0}</h1>",this.title);
+            sb.AppendFormat("<h1>{0}</h1>",this.title);
             sb.AppendFormat("{0} ", this.time);
             sb.AppendFormat("by {0} ", this.iduser);
             sb.AppendFormat("<p1>{0}</p1> ", this.content);

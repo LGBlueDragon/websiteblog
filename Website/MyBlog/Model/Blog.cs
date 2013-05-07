@@ -15,22 +15,25 @@ namespace MyBlog.Model
         private int idblog;
         private int iduser;
         private DateTime time;
+        private string title;
         private string content;
         private int reference;
         
-        public Blog(int idblog, int iduser, DateTime time, string content, int reference)
+        public Blog(int idblog, int iduser, DateTime time, string title, string content, int reference)
         {
             this.idblog = idblog;
             this.iduser = iduser;
             this.time = time;
+            this.title = title;
             this.content = content;
             this.reference = reference;
         }
 
-        public Blog(int iduser, DateTime time, string content, int reference, bool save)
+        public Blog(int iduser, DateTime time, string title, string content, int reference, bool save)
         {
             this.iduser = iduser;
             this.time = time;
+            this.title = title;
             this.content = content;
             this.reference = reference;
 
@@ -52,14 +55,15 @@ namespace MyBlog.Model
 
                 string insertcmd = "INSERT INTO " +
                                    Settings.BlogTableName +
-                                   "(iduser,time,content,ref) " +
-                                   "VALUES(?,?,?,?)";
+                                   "(iduser,time,title,content,ref) " +
+                                   "VALUES(?,?,?,?,?)";
                 MySqlCommand cmd = new MySqlCommand(insertcmd, connection);
 
                 cmd.Parameters.Add("@p1", MySqlDbType.Int32).Value = this.iduser;
                 cmd.Parameters.Add("@p2", MySqlDbType.DateTime).Value = this.time;
-                cmd.Parameters.Add("@p3", MySqlDbType.String, 5000).Value = this.content;
-                cmd.Parameters.Add("@p4", MySqlDbType.Int16).Value = this.reference;
+                cmd.Parameters.Add("@p3", MySqlDbType.String).Value = this.title;
+                cmd.Parameters.Add("@p4", MySqlDbType.String, 5000).Value = this.content;
+                cmd.Parameters.Add("@p5", MySqlDbType.Int16).Value = this.reference;
 
                 if (cmd.ExecuteNonQuery() == 1)
                 {
@@ -113,11 +117,11 @@ namespace MyBlog.Model
 
                 string insertcmd = "SELECT idblog FROM " +
                                     Settings.BlogTableName +
-                                    " WHERE iduser = @p1 AND content = @p2";
+                                    " WHERE iduser = @p1 AND title = @p2";
                 MySqlCommand cmd = new MySqlCommand(insertcmd, connection);
 
                 cmd.Parameters.Add("@p1", MySqlDbType.Int32).Value = this.iduser;
-                cmd.Parameters.Add("@p2", MySqlDbType.String).Value = this.content;
+                cmd.Parameters.Add("@p2", MySqlDbType.String).Value = this.title;
 
                 MySqlDataReader dr = cmd.ExecuteReader();
                 dr.Read();
@@ -146,10 +150,11 @@ namespace MyBlog.Model
                     int idblog = (int)dr["idblog"];
                     int iduser = (int)dr["iduser"];
                     DateTime time = (DateTime)dr["time"];
+                    string title = (string)dr["title"];
                     string content = (string)dr["content"];
                     int reference = (int)dr["ref"];
 
-                    Blog tmp = new Blog(idblog, iduser, time, content, reference);
+                    Blog tmp = new Blog(idblog, iduser, time, title, content, reference);
                     bl.Add(tmp);
                 }
                 connection.Close();
@@ -179,10 +184,11 @@ namespace MyBlog.Model
                     int idblog = (int)dr["idblog"];
                     int iduser = (int)dr["iduser"];
                     DateTime time = (DateTime)dr["time"];
+                    string title = (string)dr["title"];
                     string content = (string)dr["content"];
                     int reference = (int)dr["ref"];
 
-                    Blog tmp2 = new Blog(idblog, iduser, time, content, reference);
+                    Blog tmp2 = new Blog(idblog, iduser, time, title, content, reference);
                     comlist.Add(tmp2);
                 }
 

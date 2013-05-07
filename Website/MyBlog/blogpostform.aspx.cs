@@ -19,7 +19,7 @@ namespace MyBlog
         protected void postconfirm_Click(object sender, EventArgs e)
         {
             int iduser = 1; //temp
-            Blog blog = new Blog(iduser, DateTime.UtcNow, postformarea.Text, 0,true);
+            Blog blog = new Blog(iduser, DateTime.UtcNow, titlebox.Text, postformarea.Text, 0,true);
             Response.Redirect("index.aspx");
         }
 
