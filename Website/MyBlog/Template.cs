@@ -12,7 +12,7 @@ namespace MyBlog
         private List<string> lines = new List<string>();
         public Template(string filename)
         {
-            using (StreamReader sr = new StreamReader("C:/VSProjects/github/websiteblog/Website/MyBlog/Templates/" + filename))
+            using (StreamReader sr = new StreamReader(Settings.TemplateFolderDefault + filename))
             {
                 while (!sr.EndOfStream)
                 {

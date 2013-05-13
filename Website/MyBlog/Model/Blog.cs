@@ -110,7 +110,7 @@ namespace MyBlog.Model
             }
         }
 
-        private int GetPostID()
+        public int GetPostID()
         {
             int ourpostid;
             string cstring = Settings.ConnectionString;

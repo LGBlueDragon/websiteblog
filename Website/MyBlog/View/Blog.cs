@@ -22,5 +22,15 @@ namespace MyBlog.Model
 
             return t.Render(values);
         }
+
+        public string ToHTMLComment(Template t)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>();
+            values.Add("date", this.time.ToString());
+            values.Add("user", this.user.Username);
+            values.Add("content", this.content);
+
+            return t.Render(values);
+        }
     }
 }

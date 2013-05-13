@@ -13,39 +13,39 @@ namespace MyBlog {
     public partial class blogpostform {
         
         /// <summary>
-        /// titlebox control.
+        /// textbox_title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox titlebox;
+        protected global::System.Web.UI.WebControls.TextBox textbox_title;
         
         /// <summary>
-        /// postformarea control.
+        /// textbox_content control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox postformarea;
+        protected global::System.Web.UI.WebControls.TextBox textbox_content;
         
         /// <summary>
-        /// postconfirm control.
+        /// button_confirmpost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button postconfirm;
+        protected global::System.Web.UI.WebControls.Button button_confirmpost;
         
         /// <summary>
-        /// postcancel control.
+        /// button_cancelpost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button postcancel;
+        protected global::System.Web.UI.WebControls.Button button_cancelpost;
     }
 }

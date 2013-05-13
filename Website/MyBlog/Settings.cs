@@ -59,5 +59,23 @@ namespace MyBlog
             }
         }
 
+        public static string TemplateFolderDefault
+        {
+            get
+            {
+                string tempdir = "C:/VSProjects/github/websiteblog/Website/MyBlog/Templates/";
+                return tempdir;
+            }
+        }
+
+        public static string TemplateFolderNormal
+        {
+            get
+            {
+                string tempdir = "Templates/";
+                return tempdir;
+            }
+        }
+
     }
 }

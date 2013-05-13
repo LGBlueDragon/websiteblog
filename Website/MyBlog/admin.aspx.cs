@@ -16,16 +16,17 @@ namespace MyBlog
                 return;
         }
 
-        protected void postconfirm_Click(object sender, EventArgs e)
+        protected void button_confirmpost_Click(object sender, EventArgs e)
         {
             int iduser = 1; //temp
-            Blog blog = new Blog(iduser, null, DateTime.UtcNow, titlebox.Text, postformarea.Text, 0,true);
-            Response.Redirect("index.aspx");
+            Blog blog = new Blog(iduser, null, DateTime.UtcNow, textbox_title.Text, textbox_content.Text, 0, true);
+            int idblog = blog.GetPostID();
+            Response.Redirect(String.Format("blog.aspx?id={0}", idblog));
         }
 
-        protected void postcancel_Click(object sender, EventArgs e)
+        protected void button_cancelpost_Click(object sender, EventArgs e)
         {
-            Response.Redirect("index.aspx"); 
+            Response.Redirect("admin.aspx"); 
         }
     }
 }
