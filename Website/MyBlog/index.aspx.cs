@@ -18,10 +18,11 @@ namespace MyBlog
 
             List<Blog> blog = Blog.GetAll();
             StringBuilder sb = new StringBuilder();
+            Template blogtemplate = new Template("Blog.htm");
             
             foreach (Blog i in blog)
             {
-                sb.Append(i.ToHTML());
+                sb.AppendLine(i.ToHTML(blogtemplate));
             }
 
             blogroll.Text = sb.ToString();

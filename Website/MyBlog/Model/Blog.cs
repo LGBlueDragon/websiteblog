@@ -18,8 +18,9 @@ namespace MyBlog.Model
         private string title;
         private string content;
         private int reference;
+        private User user;
         
-        public Blog(int idblog, int iduser, DateTime time, string title, string content, int reference)
+        public Blog(int idblog, int iduser, User user, DateTime time, string title, string content, int reference)
         {
             this.idblog = idblog;
             this.iduser = iduser;
@@ -27,15 +28,17 @@ namespace MyBlog.Model
             this.title = title;
             this.content = content;
             this.reference = reference;
+            this.user = user;
         }
 
-        public Blog(int iduser, DateTime time, string title, string content, int reference, bool save)
+        public Blog(int iduser, User user, DateTime time, string title, string content, int reference, bool save)
         {
             this.iduser = iduser;
             this.time = time;
             this.title = title;
             this.content = content;
             this.reference = reference;
+            this.user = user;
 
             if (save)
             {
@@ -141,7 +144,7 @@ namespace MyBlog.Model
             {
                 connection.Open();
 
-                string insertcmd = "SELECT * FROM " + Settings.BlogTableName + " ORDER BY time DESC";
+                string insertcmd = "SELECT * FROM " + Settings.BlogTableName + " b," + Settings.UserTableName + " u WHERE b.iduser = u.iduser AND b.ref = 0 ORDER BY time DESC";
                 MySqlCommand cmd = new MySqlCommand(insertcmd, connection);
 
                 MySqlDataReader dr = cmd.ExecuteReader();
@@ -153,8 +156,13 @@ namespace MyBlog.Model
                     string title = (string)dr["title"];
                     string content = (string)dr["content"];
                     int reference = (int)dr["ref"];
+                    string username = (string)dr["username"];
+                    string email = (string)dr["email"];
+                    int usergroup = (int)dr["usergroup"];
 
-                    Blog tmp = new Blog(idblog, iduser, time, title, content, reference);
+                    User user = new User(username, "", email, usergroup);
+
+                    Blog tmp = new Blog(idblog, iduser, user, time, title, content, reference);
                     bl.Add(tmp);
                 }
                 connection.Close();
@@ -171,9 +179,7 @@ namespace MyBlog.Model
             {
                 connection.Open();
 
-                string insertcmd = "SELECT * FROM " +
-                                    Settings.BlogTableName +
-                                    " WHERE ref = @p1";
+                string insertcmd = "SELECT * FROM " + Settings.BlogTableName + " b," + Settings.UserTableName + " u WHERE b.iduser = u.iduser AND b.ref = @p1 ORDER BY time DESC";
                 MySqlCommand cmd = new MySqlCommand(insertcmd, connection);
 
                 cmd.Parameters.Add("@p1", MySqlDbType.Int16).Value = this.idblog;
@@ -187,8 +193,13 @@ namespace MyBlog.Model
                     string title = (string)dr["title"];
                     string content = (string)dr["content"];
                     int reference = (int)dr["ref"];
+                    string username = (string)dr["username"];
+                    string email = (string)dr["email"];
+                    int usergroup = (int)dr["usergroup"];
 
-                    Blog tmp2 = new Blog(idblog, iduser, time, title, content, reference);
+                    User user = new User(username, "", email, usergroup);
+
+                    Blog tmp2 = new Blog(idblog, iduser, user, time, title, content, reference);
                     comlist.Add(tmp2);
                 }
 

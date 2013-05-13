@@ -19,8 +19,17 @@ namespace MyBlog.Model
         private string email;
         private int usergroup;
 
-
         public User(string username, string password, string email, int usergroup)
+        {
+            this.username = username;
+            this.password = password;
+            this.email = email;
+            this.usergroup = usergroup;
+
+            this.iduser = GetUserID();
+        }
+
+        public User(string username, string password, string email, int usergroup, bool save)
         {
             this.username = username;
             this.password = password;
@@ -33,6 +42,21 @@ namespace MyBlog.Model
            }
 
            this.iduser = GetUserID();
+        }
+
+        public string Username
+        {
+            get { return this.username; }
+        }
+
+        public string Email
+        {
+            get { return this.email; }
+        }
+
+        public int Usergroup
+        {
+            get { return this.usergroup; }
         }
 
         public override string ToString()

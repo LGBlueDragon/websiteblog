@@ -8,17 +8,19 @@ namespace MyBlog.Model
 {
     public partial class Blog
     {
-        public string ToHTML()
+        public string ToHTML(Template t)
         {
             int numcomment = NumComments();
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("<h1>{0}</h1>",this.title);
-            sb.AppendFormat("{0} ", this.time);
-            sb.AppendFormat("by {0} ", this.iduser);
-            sb.AppendFormat("<p1>{0}</p1> ", this.content);
-            sb.AppendFormat("<a href='blogcomments.aspx?id={0}'>Comments({1})</a><br />",this.idblog, numcomment);
             
-            return sb.ToString();
+            Dictionary<string,string> values = new Dictionary<string,string>();
+            values.Add("title",this.title);
+            values.Add("date",this.time.ToString());
+            values.Add("user", this.user.Username);
+            values.Add("content", this.content);
+            values.Add("idpage", this.idblog.ToString());
+            values.Add("numcomments", numcomment.ToString());
+
+            return t.Render(values);
         }
     }
 }

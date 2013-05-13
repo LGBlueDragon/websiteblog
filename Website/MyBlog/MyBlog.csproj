@@ -63,10 +63,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="blogcomments.aspx" />
-    <Content Include="blogpostform.aspx" />
+    <Content Include="blog.aspx" />
+    <Content Include="admin.aspx" />
     <Content Include="cs\main.css" />
     <Content Include="index.aspx" />
+    <Content Include="Templates\User.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Blog.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Comment.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -78,19 +87,19 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="blogcomments.aspx.cs">
-      <DependentUpon>blogcomments.aspx</DependentUpon>
+    <Compile Include="blog.aspx.cs">
+      <DependentUpon>blog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="blogcomments.aspx.designer.cs">
-      <DependentUpon>blogcomments.aspx</DependentUpon>
+    <Compile Include="blog.aspx.designer.cs">
+      <DependentUpon>blog.aspx</DependentUpon>
     </Compile>
-    <Compile Include="blogpostform.aspx.cs">
-      <DependentUpon>blogpostform.aspx</DependentUpon>
+    <Compile Include="admin.aspx.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="blogpostform.aspx.designer.cs">
-      <DependentUpon>blogpostform.aspx</DependentUpon>
+    <Compile Include="admin.aspx.designer.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -103,6 +112,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Template.cs" />
     <Compile Include="View\Blog.cs" />
     <Compile Include="website.Master.cs">
       <DependentUpon>website.Master</DependentUpon>
