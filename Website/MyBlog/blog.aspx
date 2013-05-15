@@ -2,12 +2,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div id="blogrolldiv2"><asp:Label ID="blogroll2" runat="server" Text="BlogRoll"></asp:Label></div>
+    <div id="div_blogpost"><asp:Label ID="label_blogpost" runat="server" Text="Empty Post"></asp:Label></div>
     <hr />
-    <div id ="labelcommentsdiv"><asp:Label ID="labelcomments" runat="server" Text="CommentRoll"></asp:Label></div>
+    <div id ="div_blogcomments"><asp:Label ID="label_comments" runat="server" Text="Empty Comments"></asp:Label></div>
     <hr />
-    <div id="printcommentdiv"><asp:TextBox ID="printcomment" runat="server" 
+    <div id="div_addcomment"><asp:TextBox ID="textbox_addcomment" runat="server" 
             TextMode="MultiLine" Height="90px" Width="208px"></asp:TextBox>
-        <asp:Button ID="printcommentok"
-            runat="server" Text="Post" onclick="printcommentok_Click" /></div>
+        <asp:Button ID="button_addcomment"
+            runat="server" Text="Post" onclick="button_addcomment_Click" /></div>
 </asp:Content>

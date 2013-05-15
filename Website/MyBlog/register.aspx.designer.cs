@@ -10,42 +10,33 @@
 namespace MyBlog {
     
     
-    public partial class blogcomments {
+    public partial class register {
         
         /// <summary>
-        /// label_blogpost control.
+        /// CreateUserWizard1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_blogpost;
+        protected global::System.Web.UI.WebControls.CreateUserWizard CreateUserWizard1;
         
         /// <summary>
-        /// label_comments control.
+        /// CreateUserWizardStep1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label label_comments;
+        protected global::System.Web.UI.WebControls.CreateUserWizardStep CreateUserWizardStep1;
         
         /// <summary>
-        /// textbox_addcomment control.
+        /// CompleteWizardStep1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textbox_addcomment;
-        
-        /// <summary>
-        /// button_addcomment control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button_addcomment;
+        protected global::System.Web.UI.WebControls.CompleteWizardStep CompleteWizardStep1;
     }
 }

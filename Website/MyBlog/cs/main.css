@@ -1,7 +1,28 @@
 ﻿body {
 }
 
-.postform
+.bodystyle
 {
-    background-color:Blue;
+    float:left;
+    height:auto;
+    width:70%;
+}
+
+.navstyle
+{
+    float:right;
+    height:auto;
+    width:30%;
+}
+
+.blogtemplate
+{
+    border:1px solid;
+    border-radius:10px;
+}
+
+.commenttemplate
+{
+    border:1px solid;
+    border-radius:5px;
 }

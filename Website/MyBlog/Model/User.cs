@@ -143,15 +143,36 @@ namespace MyBlog.Model
             using (MySqlConnection connection = new MySqlConnection(cstring))
             {
                 connection.Open();
-                string selectcmd = "SELECT iduser FROM " +
+                string selectcmd = "SELECT id FROM " +
                                    Settings.UserTableName +
-                                   " WHERE username = ?";
+                                   " WHERE name = ?";
 
                 MySqlCommand cmd = new MySqlCommand(selectcmd, connection);
-                cmd.Parameters.AddWithValue("@username", this.username);
+                cmd.Parameters.AddWithValue("@name", this.username);
                 MySqlDataReader dr = cmd.ExecuteReader();
                 dr.Read();
-                ouruserid = (int)dr["iduser"];
+                ouruserid = (int)dr["id"];
+                connection.Close();
+            }
+            return ouruserid;
+        }
+
+        public static int GetID(string username)
+        {
+            int ouruserid;
+            string cstring = Settings.ConnectionString;
+            using (MySqlConnection connection = new MySqlConnection(cstring))
+            {
+                connection.Open();
+                string selectcmd = "SELECT id FROM " +
+                                   Settings.UserTableName +
+                                   " WHERE name = ?";
+
+                MySqlCommand cmd = new MySqlCommand(selectcmd, connection);
+                cmd.Parameters.AddWithValue("@name", username);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                dr.Read();
+                ouruserid = (int)dr["id"];
                 connection.Close();
             }
             return ouruserid;

@@ -37,7 +37,7 @@ namespace MyBlog
                 {
                     case "odbc" : return "[dbo].[user]";
                     case "local":
-                    case "remote": return "website.user";
+                    case "remote": return "website.my_aspnet_users";
                     default: throw new ConfigurationErrorsException("Missing 'generalSettings' in .config");
                 }   
             }

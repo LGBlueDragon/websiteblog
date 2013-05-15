@@ -144,7 +144,7 @@ namespace MyBlog.Model
             {
                 connection.Open();
 
-                string insertcmd = "SELECT * FROM " + Settings.BlogTableName + " b," + Settings.UserTableName + " u WHERE b.iduser = u.iduser AND b.ref = 0 ORDER BY time DESC";
+                string insertcmd = "SELECT * FROM " + Settings.BlogTableName + " b," + Settings.UserTableName + " u WHERE b.iduser = u.id AND b.ref = 0 ORDER BY time DESC";
                 MySqlCommand cmd = new MySqlCommand(insertcmd, connection);
 
                 MySqlDataReader dr = cmd.ExecuteReader();
@@ -156,11 +156,9 @@ namespace MyBlog.Model
                     string title = (string)dr["title"];
                     string content = (string)dr["content"];
                     int reference = (int)dr["ref"];
-                    string username = (string)dr["username"];
-                    string email = (string)dr["email"];
-                    int usergroup = (int)dr["usergroup"];
+                    string username = (string)dr["name"];
 
-                    User user = new User(username, "", email, usergroup);
+                    User user = new User(username, "", "", 0);
 
                     Blog tmp = new Blog(idblog, iduser, user, time, title, content, reference);
                     bl.Add(tmp);
@@ -179,7 +177,7 @@ namespace MyBlog.Model
             {
                 connection.Open();
 
-                string insertcmd = "SELECT * FROM " + Settings.BlogTableName + " b," + Settings.UserTableName + " u WHERE b.iduser = u.iduser AND b.ref = @p1 ORDER BY time DESC";
+                string insertcmd = "SELECT * FROM " + Settings.BlogTableName + " b," + Settings.UserTableName + " u WHERE b.iduser = u.id AND b.ref = @p1 ORDER BY time DESC";
                 MySqlCommand cmd = new MySqlCommand(insertcmd, connection);
 
                 cmd.Parameters.Add("@p1", MySqlDbType.Int16).Value = this.idblog;
@@ -193,11 +191,9 @@ namespace MyBlog.Model
                     string title = (string)dr["title"];
                     string content = (string)dr["content"];
                     int reference = (int)dr["ref"];
-                    string username = (string)dr["username"];
-                    string email = (string)dr["email"];
-                    int usergroup = (int)dr["usergroup"];
+                    string username = (string)dr["name"];
 
-                    User user = new User(username, "", email, usergroup);
+                    User user = new User(username, "", "", 0);
 
                     Blog tmp2 = new Blog(idblog, iduser, user, time, title, content, reference);
                     comlist.Add(tmp2);
@@ -213,6 +209,38 @@ namespace MyBlog.Model
         {
             int numcomments = Comments().Count();
             return numcomments;
+        }
+
+        public bool Load()
+        {
+            string cstring = Settings.ConnectionString;
+            using (MySqlConnection connection = new MySqlConnection(cstring))
+            {
+                connection.Open();
+
+                string insertcmd = "SELECT * FROM " + Settings.BlogTableName + " b," + Settings.UserTableName + " u WHERE b.iduser = u.id AND b.idblog = @p1";
+                MySqlCommand cmd = new MySqlCommand(insertcmd, connection);
+
+                cmd.Parameters.Add("@p1", MySqlDbType.Int16).Value = this.idblog;
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (!dr.HasRows)
+                    return false;
+
+                while (dr.Read())
+                {
+                    this.iduser = (int)dr["iduser"];
+                    this.time = (DateTime)dr["time"];
+                    this.title = (string)dr["title"];
+                    this.content = (string)dr["content"];
+                    this.reference = (int)dr["ref"];
+                    string username = (string)dr["name"];
+
+                    this.user = new User(username, "", "", 0);
+                }
+                connection.Close();
+
+                return true;
+            }
         }
     }
 }
